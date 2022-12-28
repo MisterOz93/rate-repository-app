@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexGrow: 1,
     flexShrink: 1,
+    backgroundColor: theme.colors.mainBackground
   },
   appBar: {
     flexGrow: 1,

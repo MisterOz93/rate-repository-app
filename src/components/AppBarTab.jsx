@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
       color: theme.appBar.textColor,
       fontWeight: theme.fontWeights.bold,
       font: theme.fonts.main,
-      marginBottom: 35,
+      marginTop: 30,
       marginLeft: 20,
       fontSize: theme.fontSizes.subheading
     }
