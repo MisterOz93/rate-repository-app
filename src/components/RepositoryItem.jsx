@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     countsContainer: {
         flexDirection: "row",
         justifyContent: 'space-evenly',
+        marginBottom: 20
     },
 
     textMargins: {
