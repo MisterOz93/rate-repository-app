@@ -5,7 +5,10 @@ const theme = {
       primary: '#0366d6',
       mainBackground: '#e1e4e8',
       itemBackground: 'white',
-      languageText: 'white'
+      languageText: 'white',
+      formBackground: 'white',
+      signInButtonText: 'white',
+      borderColor: 'gray'
     },
     fontSizes: {
       body: 14,
