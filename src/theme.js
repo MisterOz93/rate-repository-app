@@ -8,7 +8,8 @@ const theme = {
       languageText: 'white',
       formBackground: 'white',
       signInButtonText: 'white',
-      borderColor: 'gray'
+      borderColor: 'gray',
+      errorText: '#d73a4a',
     },
     fontSizes: {
       body: 14,
