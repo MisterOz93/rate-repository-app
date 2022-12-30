@@ -21,9 +21,13 @@ const AppBarTab = ({label}) => {
   const signInTab = label === 'Sign In' && styles.signUpFlex
 
   let destination = '/'
+  
   if (label === 'Sign In'){
     destination = '/signIn'
   }
+
+
+
   return (
     <Pressable style={signInTab}>
       <Link to={destination}>
