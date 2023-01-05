@@ -14,7 +14,9 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
 
-  const { data, error, loading } = useQuery(GET_REPOSITORIES);
+  const { data, error, loading } = useQuery(GET_REPOSITORIES, {
+    fetchPolicy: 'cache-and-network',
+  });
 
   if (loading){
     return <h2>Loading...</h2>
