@@ -29,9 +29,11 @@ import 'dotenv/config'
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png"                                                  
     },
     extra: {
-      env: process.env.ENV
+      env: process.env.ENV,
+      apolloUri: process.env.APOLLO_URI,
+      restUri: process.env.REST_URI,
     }
   }
