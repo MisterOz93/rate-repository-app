@@ -4,7 +4,7 @@ import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
 import theme from '../theme';
-import { Route, Routes, Navigate } from 'react-router-native'
+import { Route, Routes, Navigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
+
   return (
     <View style={styles.container}>
       <View style={styles.appBar}>
