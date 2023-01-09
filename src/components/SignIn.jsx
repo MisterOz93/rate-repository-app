@@ -57,10 +57,10 @@ const SignIn = () => {
     
     try {
       await signIn({ username, password } );
-      navigate('/')
+      navigate('/');
       
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
