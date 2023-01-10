@@ -13,12 +13,14 @@ const styles = StyleSheet.create({
       fontSize: theme.fontSizes.subheading
     },
     signUpFlex: {
-      marginLeft: 'auto'
+      marginLeft: 'auto',
+      zIndex: 0.5,
     }
   });
 
-const AppBarTab = ({label}) => {
-  const signInTab = label === 'Sign In' && styles.signUpFlex
+const AppBarTab = ({label, handlePress}) => {
+
+  const signInOutTab = label === 'Sign In' || label === 'Sign Out' && styles.signUpFlex
 
   let destination = '/'
   
@@ -26,10 +28,18 @@ const AppBarTab = ({label}) => {
     destination = '/signIn'
   }
 
-
+  if (label === 'Sign Out'){
+    
+    return(
+      <Pressable style={signInOutTab} onPress={() => handlePress()}>
+        <Text style={styles.text}>{label}</Text>
+      </Pressable>
+    )
+  }
 
   return (
-    <Pressable style={signInTab}>
+    
+    <Pressable style={signInOutTab}>
       <Link to={destination}>
         <Text style={styles.text}>{label}</Text>
       </Link>
