@@ -47,8 +47,8 @@ const initialValues = {
   password: ''
 }
 
-const SignIn = () => {
-
+const SignIn = ({submitHandler}) => {
+ /* moved to Main and passed as submitHandler
   const [signIn] = useSignIn();
   const navigate = useNavigate();
   
@@ -63,7 +63,7 @@ const SignIn = () => {
       console.log(e);
     }
   }
-
+ */
   const validationSchema = yup.object().shape({
     username: yup.string().required('Username is Required'),
     password: yup.string().required('Password is Required')
@@ -71,7 +71,7 @@ const SignIn = () => {
 
   return(
     <View style={styles.container}>
-        <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+        <Formik initialValues={initialValues} onSubmit={submitHandler} validationSchema={validationSchema}>
           {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} /> }
         </Formik>
     </View>

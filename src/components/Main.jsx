@@ -4,7 +4,8 @@ import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
 import theme from '../theme';
-import { Route, Routes, Navigate } from 'react-router-native';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-native';
+import useSignIn from '../hooks/useSignIn';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,6 +24,21 @@ const styles = StyleSheet.create({
 
 const Main = () => {
 
+  const [signIn] = useSignIn();
+  const navigate = useNavigate();
+  
+  const signInHandler = async (values) => {
+    const { username, password } = values;
+    
+    try {
+      await signIn({ username, password } );
+      navigate('/');
+      
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.appBar}>
@@ -30,7 +46,7 @@ const Main = () => {
       </View> 
       <Routes>
         <Route path='/' element={<RepositoryList />} exact/>
-        <Route path='/signIn' element={<SignIn/>} exact/>
+        <Route path='/signIn' element={<SignIn submitHandler={signInHandler}/>} exact/>
         <Route path='*' element={<Navigate to="/" replace />} />
       </Routes>
     </View>
