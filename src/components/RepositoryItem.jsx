@@ -1,10 +1,24 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Button } from "react-native";
 import Text from './Text'
 import theme from "../theme";
+import { GET_REPOSITORY } from "../graphql/queries";
+import { useQuery } from "@apollo/client";
+import { useParams } from "react-router-native";
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
+
     container: {
         backgroundColor: theme.colors.itemBackground,
+    },
+
+    singleViewContainer: {
+        flex: 5,
+        marginBottom: 150,
+    },
+
+    linkButton: {
+        margin: 20
     },
 
     headerContainer: {
@@ -70,11 +84,30 @@ export const CountItem = ({label, value}) => {
     )
 }
 
-const RepositoryItem = (item) => {
-    const {fullName, description, language, stargazersCount, ratingAverage, forksCount, reviewCount, ownerAvatarUrl } = item.item;
+const RepositoryItem = ({ item, singleView }) => {
+
+    if (singleView){
+        const { id } = useParams();
+        const { data, loading } = useQuery(GET_REPOSITORY, {
+            fetchPolicy: 'cache-and-network',
+            variables: {repositoryId: id }
+          });
+        
+          if (loading){
+            return <h2>Loading...</h2>
+          }
+          item = data.repository;
+    }
+
+    const {fullName, description, language, stargazersCount, ratingAverage, forksCount, reviewCount, ownerAvatarUrl } = item;
+
+    const handlePress = (url) => {
+        Linking.openURL(url);
+    }
 
     return (
-        <View style={styles.container} testID='repositoryItem'>
+
+        <View style={[styles.container, singleView && styles.singleViewContainer]} testID='repositoryItem'>
             <View style={styles.headerContainer}>
                 <Image style={styles.imageStyles} source={ownerAvatarUrl}/>
                 <View style={styles.headerTextContainer}>
@@ -89,6 +122,11 @@ const RepositoryItem = (item) => {
                 <CountItem label='Reviews' value={reviewCount} />
                 <CountItem label='Rating' value={ratingAverage} />
             </View>
+            { singleView && 
+            <View style={styles.linkButton}> 
+                <Button color={theme.colors.primary} title="Open in GitHub" onPress={() => handlePress(item.url)}></Button>
+            </View>
+            }
         </View>
     )
 };
