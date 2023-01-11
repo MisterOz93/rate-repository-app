@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const CountItem = ({label, value}) => {
+export const CountItem = ({label, value}) => {
 
     const formatValue = (num) => {
 
@@ -74,7 +74,7 @@ const RepositoryItem = (item) => {
     const {fullName, description, language, stargazersCount, ratingAverage, forksCount, reviewCount, ownerAvatarUrl } = item.item;
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} testID='repositoryItem'>
             <View style={styles.headerContainer}>
                 <Image style={styles.imageStyles} source={ownerAvatarUrl}/>
                 <View style={styles.headerTextContainer}>
