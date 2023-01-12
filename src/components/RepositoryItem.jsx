@@ -1,9 +1,6 @@
 import { View, Image, StyleSheet, Button } from "react-native";
 import Text from './Text'
 import theme from "../theme";
-import { GET_REPOSITORY } from "../graphql/queries";
-import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-native";
 import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
@@ -86,19 +83,7 @@ export const CountItem = ({label, value}) => {
 
 const RepositoryItem = ({ item, singleView }) => {
 
-    if (singleView){
-        const { id } = useParams();
-        const { data, loading } = useQuery(GET_REPOSITORY, {
-            fetchPolicy: 'cache-and-network',
-            variables: {repositoryId: id }
-          });
-        
-          if (loading){
-            return <h2>Loading...</h2>
-          }
-          item = data.repository;
-    }
-
+   
     const {fullName, description, language, stargazersCount, ratingAverage, forksCount, reviewCount, ownerAvatarUrl } = item;
 
     const handlePress = (url) => {

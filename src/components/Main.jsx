@@ -4,7 +4,7 @@ import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
 import theme from '../theme';
-import RepositoryItem from './RepositoryItem';
+import SingleRepository from './SingleRepository';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-native';
 import useSignIn from '../hooks/useSignIn';
 
@@ -48,7 +48,7 @@ const Main = () => {
       <Routes>
         <Route path='/' element={<RepositoryList />} exact/>
         <Route path='/signIn' element={<SignIn submitHandler={signInHandler}/>} exact/>
-        <Route path='/repository/:id' element={<RepositoryItem singleView />} exact/>
+        <Route path='/repository/:id' element={<SingleRepository />} exact/>
         <Route path='*' element={<Navigate to="/" replace />} />
       </Routes>
     </View>
