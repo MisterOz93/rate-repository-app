@@ -20,12 +20,16 @@ const styles = StyleSheet.create({
 
 const AppBarTab = ({label, handlePress}) => {
 
-  const signInOutTab = label === 'Sign In' || label === 'Sign Out' && styles.signUpFlex
+  const signInOutTab = label === 'Sign In' || label === 'Sign Out' && styles.signUpFlex;
 
-  let destination = '/'
+  let destination = '/';
   
   if (label === 'Sign In'){
-    destination = '/signIn'
+    destination = '/signIn';
+  }
+
+  if (label === 'Create a Review') {
+    destination = '/review';
   }
 
   if (label === 'Sign Out'){

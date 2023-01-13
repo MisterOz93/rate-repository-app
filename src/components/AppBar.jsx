@@ -53,7 +53,10 @@ const AppBar = () => {
         <AppBarTab label={'Sign In'} />
       }
       { currentUser &&
-        <AppBarTab label={'Sign Out'} handlePress={signOut} />
+        <>
+          <AppBarTab label={'Create a Review'} />
+          <AppBarTab label={'Sign Out'} handlePress={signOut} />
+        </>
         }
       </ScrollView>
     </View>

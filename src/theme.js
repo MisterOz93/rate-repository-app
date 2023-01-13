@@ -35,6 +35,12 @@ const theme = {
     appBar: {
       backgroundColor: '#24292e',
       textColor: '#F8F8F8'
+    },
+    inputField: {
+      height: 40,
+      margin: 10,
+      borderWidth: 1,
+      padding: 10,
     }
   };
   

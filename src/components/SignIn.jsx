@@ -13,11 +13,8 @@ const styles = StyleSheet.create({
     },
 
     input: {
-      height: 40,
-      margin: 10,
-      borderWidth: 1,
+      ...theme.inputField,
       borderColor: theme.colors.borderColor,
-      padding: 10,
     },
     signInButton: {
       borderWidth: 1,
