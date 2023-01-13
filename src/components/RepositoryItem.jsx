@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
     singleViewContainer: {
         flex: 5,
-        marginBottom: 150,
+        marginBottom: 10,
     },
 
     linkButton: {

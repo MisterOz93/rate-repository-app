@@ -1,4 +1,5 @@
-import { FlatList, View, Text, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
+import Text from "./Text";
 import { useParams } from "react-router-native";
 import { GET_REPOSITORY } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
@@ -16,11 +17,30 @@ const styles = StyleSheet.create({
 
     reviewRating: {
         borderStyle: 'solid',
-        borderColor: theme.colors.borderColor,
+        borderWidth: 2,
+        borderRadius: 15,
+        height: 30,
+        width: 30,
+        borderColor: theme.colors.primary,
+        margin: 5,
+        marginRight: 15,
+    },
+
+    reviewNumber: {
+        margin: 'auto',
+        color: theme.colors.primary,
     },
 
     reviewAuthorAndDate: {
+        marginTop: 5,
 
+    },
+
+    reviewText: {
+        marginLeft: 50,
+        marginTop: 5,
+        marginBottom: 10,
+        marginRight: 10,
     },
 
     separator: {
@@ -41,14 +61,16 @@ const ReviewItem = ({review}) =>  {
         <View style={styles.reviewContainer}>
             <View style={styles.reviewHeader}>
                 <View style={styles.reviewRating}>
-                    <Text>{review.rating}</Text>
+                    <Text fontWeight='bold' style={styles.reviewNumber}>{review.rating}</Text>
                 </View>
                 <View style={styles.reviewAuthorAndDate}>
-                    <Text>{review.user.username}</Text>
-                    <Text>{reviewDate}</Text>
+                    <Text fontWeight='bold'>{review.user.username}</Text>
+                    <Text color='textSecondary'>{reviewDate}</Text>
                 </View>
             </View>
-            <Text>{review.text}</Text>
+            <View style={styles.reviewText}>
+                <Text>{review.text}</Text>
+            </View>
         </View>
     )
 }
