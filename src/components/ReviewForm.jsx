@@ -34,7 +34,7 @@ const FormikForm = ({ onSubmit }) => {
             <FormikTextInput style={styles.input} name='repoOwner' placeholder='Repository owner name' placeholderTextColor="gray"/>
             <FormikTextInput style={styles.input} name='repoName' placeholder='Repository name' placeholderTextColor="gray"/>
             <FormikTextInput style={styles.input} name='rating' placeholder='Rating between 0 and 100' placeholderTextColor="gray"/>
-            <FormikTextInput style={styles.input} name='reviewText' placeholder='Review' placeholderTextColor="gray"/>
+            <FormikTextInput style={styles.input} name='reviewText' placeholder='Review' placeholderTextColor="gray" multiline/>
             <Pressable onPress={onSubmit}>
                 <Text fontWeight='bold' style={styles.submitButton}>Create a review</Text>
             </Pressable>
@@ -54,7 +54,7 @@ const ReviewForm = () => {
     const validationSchema = yup.object().shape({
         repoOwner: yup.string().required('Repository owner name is required'),
         repoName: yup.string().required('Repository name is required'),
-        rating: yup.number().required('Rating is required')
+        rating: yup.number().required('Rating is required').min(0).max(100),
       })
 
     const onSubmit = () => {
