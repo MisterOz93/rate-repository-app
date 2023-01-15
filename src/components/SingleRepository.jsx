@@ -89,7 +89,6 @@ const SingleRepository = () => {
     }
     const repository = data.repository;
     const reviews = repository ? repository.reviews.edges.map(edge => edge.node) : [];
-
     return(
         <FlatList
             data={reviews}
