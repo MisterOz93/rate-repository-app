@@ -55,6 +55,8 @@ const SignUpForm = () => {
 
     const [signUp] = useSignUp();
     const [signIn] = useSignIn();
+    const navigate = useNavigate();
+    const [error, setError] = useState(null);
 
     const initialValues = {
         username: '',
@@ -69,10 +71,18 @@ const SignUpForm = () => {
       });
 
 
-    const onSubmit = ( values ) => {
-        const {username, password, passwordConfirmation } = values; //remove pw conf when done debugging
-        console.log('after sign up, values are', username, password, passwordConfirmation);
-        //try sign up then try sign in
+    const onSubmit = async  (values) => {
+        const {username, password } = values;
+        try {
+            await signUp({ username, password });
+            await signIn({ username, password });
+            navigate('/');
+        } catch (e) {
+            setError(`Error: ${e.message}`);
+            setTimeout(() => {
+                setError(null);
+            }, 6000);
+        }
     }
 
     return(
@@ -80,6 +90,7 @@ const SignUpForm = () => {
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 { ({handleSubmit}) => <FormikForm onSubmit={handleSubmit}/> }
             </Formik>
+            {error && <Text fontWeight='bold' style={styles.errorText}>{error}</Text>}
         </View>
     )
 
