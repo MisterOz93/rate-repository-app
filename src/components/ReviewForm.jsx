@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         color: theme.colors.errorText,
     }
 
-})
+});
 
 const FormikForm = ({ onSubmit }) => {
     return(
@@ -62,14 +62,14 @@ const ReviewForm = () => {
         repositoryName: '',
         rating: '',
         text: '',
-    }
+    };
 
 
     const validationSchema = yup.object().shape({
         ownerName: yup.string().required('Repository owner name is required'),
         repositoryName: yup.string().required('Repository name is required'),
         rating: yup.number().required('Rating is required').min(0).max(100).typeError('Rating must be a valid number.'),
-      })
+      });
 
     const onSubmit = async (values) => {
         const { ownerName, repositoryName, text } = values;

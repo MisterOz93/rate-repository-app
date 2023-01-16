@@ -22,23 +22,26 @@ const AppBarTab = ({label, handlePress}) => {
 
   const signInOutTab = label === 'Sign In' || label === 'Sign Out' && styles.signUpFlex;
 
-  let destination = '/';
-  
-  if (label === 'Sign In'){
-    destination = '/signIn';
-  }
+  let destination = '';
 
-  if (label === 'Create a Review') {
-    destination = '/review';
-  }
-
-  if (label === 'Sign Out'){
-    
-    return(
-      <Pressable style={signInOutTab} onPress={() => handlePress()}>
-        <Text style={styles.text}>{label}</Text>
-      </Pressable>
-    )
+  switch(label) {
+    case('Sign In'):
+      destination = '/signIn';
+      break;
+    case('Create a Review'):
+      destination = '/review';
+      break;
+    case('Sign Up'):
+      destination = '/signUp';
+      break;
+    case('Sign Out'):
+      return(
+        <Pressable style={signInOutTab} onPress={() => handlePress()}>
+          <Text style={styles.text}>{label}</Text>
+        </Pressable>
+      );
+    default:
+      destination ='/'
   }
 
   return (
@@ -49,6 +52,6 @@ const AppBarTab = ({label, handlePress}) => {
       </Link>
     </Pressable>
   )
-} 
+};
 
-export default AppBarTab
+export default AppBarTab;

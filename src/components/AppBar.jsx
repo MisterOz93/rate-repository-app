@@ -50,7 +50,10 @@ const AppBar = () => {
       <ScrollView horizontal>
         <AppBarTab label={'Repositories'}/>
       { !currentUser &&
-        <AppBarTab label={'Sign In'} />
+        <>
+          <AppBarTab label={'Sign Up'} />
+          <AppBarTab label={'Sign In'} />
+        </>
       }
       { currentUser &&
         <>
