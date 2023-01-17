@@ -44,7 +44,6 @@ const RepositoryListHeader = ({ orderCriteria, setOrderCriteria }) => {
 
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
-    const openMenu = () => setShowMenu(true);
     const closeMenu = () => setShowMenu(false);
 
     const itemPressHandler = (criteria) => {

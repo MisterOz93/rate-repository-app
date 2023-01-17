@@ -38,8 +38,13 @@ const RepositoryList = () => {
 
   const [orderCriteria, setOrderCriteria] = useState('Latest Repositories');
 
+
+  const orderBy = orderCriteria === 'Latest Repositories' ? 'CREATED_AT' : 'RATING_AVERAGE';
+  const orderDirection = orderCriteria === 'Lowest Rated Repositories' ? 'ASC' : 'DESC';
+
   const { data, loading } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
+    variables: {orderBy, orderDirection}
   });
 
   if (loading){
