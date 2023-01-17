@@ -1,8 +1,10 @@
 import { FlatList, View, StyleSheet, Pressable } from 'react-native';
 import RepositoryItem from './RepositoryItem'
+import RepositoryListHeader from './RepositoryListHeader';
 import { GET_REPOSITORIES } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-native';
+import { useState } from 'react';
 
 const styles = StyleSheet.create({
   separator: {
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, orderCriteria, setOrderCriteria }) => {
 
   const repositoryNodes = repositories ? repositories.edges.map(edge => edge.node) : [];
 
@@ -22,6 +24,7 @@ export const RepositoryListContainer = ({ repositories }) => {
     <FlatList
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
+      ListHeaderComponent={() => <RepositoryListHeader orderCriteria={orderCriteria} setOrderCriteria={setOrderCriteria} />}
       renderItem={({item}) => (
         <Pressable onPress={() => navigate(`/repository/${item.id}`)}>
           <RepositoryItem item={item} singleView={false} />
@@ -33,6 +36,8 @@ export const RepositoryListContainer = ({ repositories }) => {
 
 const RepositoryList = () => {
 
+  const [orderCriteria, setOrderCriteria] = useState('latest');
+
   const { data, loading } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
   });
@@ -42,7 +47,7 @@ const RepositoryList = () => {
   }
 
   return (
-   <RepositoryListContainer repositories={data.repositories} />
+   <RepositoryListContainer repositories={data.repositories} orderCriteria={orderCriteria} setOrderCriteria={setOrderCriteria} />
   );
 };
 

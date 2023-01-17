@@ -12,6 +12,8 @@ const theme = {
       signInButtonText: 'white',
       borderColor: 'gray',
       errorText: '#d73a4a',
+      dropdownMenu: '#F0F0F0',
+      dropdownText: 'black',
     },
     fontSizes: {
       body: 14,

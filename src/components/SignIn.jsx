@@ -8,8 +8,9 @@ import * as yup from 'yup';
 
 const styles = StyleSheet.create({
     container: {
-        flexGrow: 13,
+        flex: 13,
         backgroundColor: theme.colors.formBackground,
+        marginBottom: 30,
     },
 
     input: {

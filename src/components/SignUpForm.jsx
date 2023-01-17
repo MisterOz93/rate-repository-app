@@ -12,7 +12,7 @@ import useSignUp from '../hooks/useSignUp';
 const styles = StyleSheet.create({
     
     topLevelContainer: {
-        flex: 5,
+        flex: 13,
         backgroundColor: theme.colors.formBackground,
         marginBottom: 30,
     },
