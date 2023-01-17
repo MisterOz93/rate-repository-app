@@ -1,4 +1,4 @@
-import { View, StyleSheet, Pressable, Modal } from "react-native";
+import { View, StyleSheet, Pressable, Modal, TouchableOpacity, } from "react-native";
 import { Picker } from '@react-native-picker/picker';
 import Text from "./Text";
 import { useState } from "react";
@@ -7,21 +7,34 @@ import theme from "../theme";
 const styles = StyleSheet.create({
     container: {
         backgroundColor: theme.colors.dropdownMenu,
-        //add more style
+        height: 50,
+        justifyContent: 'center',
+        paddingLeft: 20,
+    },
+
+    headerButton: {
+        marginBottom: 10,
     },
 
    modalContainer: {
     backgroundColor: 'rgba(0,0,0,0.3)',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+   },
+
+   modalHeader: {
+    backgroundColor: theme.colors.itemBackground,
    },
 
    modalContent: {
     height: 300,
     width: 300,
-    //add more style to picker & items
-   }
+   },
+
+   cancelOption: {
+    color: theme.colors.dropdownCancel,
+   },
 });
 
 const RepositoryListHeader = ({ orderCriteria, setOrderCriteria }) => {
@@ -35,28 +48,35 @@ const RepositoryListHeader = ({ orderCriteria, setOrderCriteria }) => {
     const closeMenu = () => setShowMenu(false);
 
     const itemPressHandler = (criteria) => {
-        setOrderCriteria(criteria);
+        if (criteria !== 'cancel') {
+            setOrderCriteria(criteria);  
+        }
+
         closeModal();
         closeMenu();
     }
     
     return (
             <View style={styles.container}>
-            <Pressable onPress={openModal}><Text>Sort Repositories By:</Text></Pressable>
+                <Text style={styles.headerButton}>Click To Sort Repositories By:</Text>
+            <Pressable onPress={openModal}><Text>{orderCriteria} </Text></Pressable>
                 <Modal transparent animationType='fade' visible={showModal} style={styles.modal}> 
-                    <View style={styles.modalContainer}>
-                        <View style={styles.modalContent}>
+                    <TouchableOpacity style={styles.modalContainer} onPress={() => { closeModal()} }>
+                        <TouchableOpacity style={styles.modalContent} onPress={() => {}} activeOpacity={1} >
+                            <Text style={styles.modalHeader}>Sort Repositories By...</Text>
                             <Picker
                                 selectedValue={orderCriteria}
                                 onValueChange={(itemValue) =>
                                 itemPressHandler(itemValue)}
-                            >
-                                <Picker.Item label="Most Recent" value="latest" />
-                                <Picker.Item label="Highest Rated" value="highest" />
-                                <Picker.Item label="Lowest Rated" value="lowest" />
+                                mode='dialog'
+                            >   
+                                <Picker.Item label="Cancel" value='cancel' color={styles.cancelOption.color}/>
+                                <Picker.Item label="Latest" value="Latest Repositories" />
+                                <Picker.Item label="Highest Rated" value="Highest Rated Repositories" />
+                                <Picker.Item label="Lowest Rated" value="Lowest Rated Repositories" />
                             </Picker>
-                        </View>
-                    </View>      
+                        </TouchableOpacity>
+                    </TouchableOpacity>     
                 </Modal>
             </View>    
     )

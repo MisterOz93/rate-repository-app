@@ -36,7 +36,7 @@ export const RepositoryListContainer = ({ repositories, orderCriteria, setOrderC
 
 const RepositoryList = () => {
 
-  const [orderCriteria, setOrderCriteria] = useState('latest');
+  const [orderCriteria, setOrderCriteria] = useState('Latest Repositories');
 
   const { data, loading } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',

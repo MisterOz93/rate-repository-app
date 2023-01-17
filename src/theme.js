@@ -14,6 +14,7 @@ const theme = {
       errorText: '#d73a4a',
       dropdownMenu: '#F0F0F0',
       dropdownText: 'black',
+      dropdownCancel: '#909090',
     },
     fontSizes: {
       body: 14,
