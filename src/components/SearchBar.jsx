@@ -1,8 +1,10 @@
 import { View, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextInput from './TextInput';
+import Text from "./Text";
 import theme from "../theme";
 import { Feather, Entypo } from "@expo/vector-icons";
+import { useDebouncedCallback } from 'use-debounce';
 
 const styles = StyleSheet.create({
     container: {
@@ -27,6 +29,17 @@ const styles = StyleSheet.create({
 const SearchBar = ({ query, setQuery }) => {
 
     const [clicked, setClicked] = useState(false);
+    const [text, setText ] = useState(query)
+
+    useEffect(() => {
+        debounced(text)
+    }, [text])
+    const debounced = useDebouncedCallback(
+        (input) => {
+            setQuery(input)
+        },
+        500
+    );
 
     return(
         <View style={styles.container}>
@@ -40,8 +53,8 @@ const SearchBar = ({ query, setQuery }) => {
                 autoFocus='autoFocus'
                 placeholder='Search Repositories List...' 
                 placeholderTextColor='gray' 
-                onChangeText={setQuery} 
-                value={query}
+                onChangeText={setText}
+                value={text}
                 onFocus={() => setClicked(true)} 
             />
             {clicked && <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
@@ -49,6 +62,7 @@ const SearchBar = ({ query, setQuery }) => {
               setClicked(false);
             }}/> 
             }
+            <Text>query: {query}</Text>
         </View>
     )
 };
