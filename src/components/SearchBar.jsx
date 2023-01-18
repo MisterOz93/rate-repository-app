@@ -1,7 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import TextInput from './TextInput';
-import Text from "./Text";
 import theme from "../theme";
 import { Feather, Entypo } from "@expo/vector-icons";
 import { useDebouncedCallback } from 'use-debounce';
@@ -38,7 +37,7 @@ const SearchBar = ({ query, setQuery }) => {
         (input) => {
             setQuery(input)
         },
-        500
+        700
     );
 
     return(
@@ -62,7 +61,6 @@ const SearchBar = ({ query, setQuery }) => {
               setClicked(false);
             }}/> 
             }
-            <Text>query: {query}</Text>
         </View>
     )
 };

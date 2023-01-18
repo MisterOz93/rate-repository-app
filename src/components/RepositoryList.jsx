@@ -50,7 +50,7 @@ const RepositoryList = () => {
 
   const { data, loading } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
-    variables: {orderBy, orderDirection}
+    variables: {orderBy, orderDirection, searchKeyword: query }
   });
 
   if (loading){

@@ -18,8 +18,6 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.mainBackground,
   },
   appBar: {
-    flexGrow: 1,
-    flexShrink: 1,
     backgroundColor: theme.appBar.backgroundColor,
     justifyContent: 'flex-end'
   },
