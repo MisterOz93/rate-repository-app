@@ -6,7 +6,6 @@ const useRepositories = (variables) => {
   const { data, loading, fetchMore, ...result} = useQuery(GET_REPOSITORIES, {
     variables,
     fetchPolicy: 'cache-and-network',
-    //others?
   });
 
   const handleFetchMore = () => {
@@ -16,14 +15,13 @@ const useRepositories = (variables) => {
     if (!canFetchMore){
       return;
     }
-
+  
     fetchMore({
       variables: {
         after: data.repositories.pageInfo.endCursor,
         ...variables,
       },
     });
-
   };
 
   return { 

@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
+
+  container: {
+    marginBottom: 10,
+  }
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -23,6 +27,7 @@ export const RepositoryListContainer = ({ repositories, orderCriteria, setOrderC
 
   return (
     <FlatList
+      style={styles.container}
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       ListHeaderComponent={() => 
@@ -38,8 +43,8 @@ export const RepositoryListContainer = ({ repositories, orderCriteria, setOrderC
           <RepositoryItem item={item} singleView={false} />
         </Pressable>
       )}
+      onEndReachedThreshold={0.5}
       onEndReached={onEndReach}
-      onEndReachedThreshold={1}
     />
   );
 }
@@ -53,7 +58,7 @@ const RepositoryList = () => {
   const orderBy = orderCriteria === 'Latest Repositories' ? 'CREATED_AT' : 'RATING_AVERAGE';
   const orderDirection = orderCriteria === 'Lowest Rated Repositories' ? 'ASC' : 'DESC';
 
-  const { repositories, loading }  = useRepositories({orderBy, orderDirection, searchKeyword: query })
+  const { repositories, loading, fetchMore }  = useRepositories({orderBy, orderDirection, searchKeyword: query })
 
   /*const { data, loading } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
@@ -61,7 +66,7 @@ const RepositoryList = () => {
   }); */
 
   const onEndReach = () => {
-    console.log('end reached!')
+    fetchMore();
   };
 
   
