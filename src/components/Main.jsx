@@ -51,7 +51,7 @@ const Main = () => {
         <Route path='/signIn' element={<SignIn submitHandler={signInHandler}/>} exact/>
         <Route path='/repository/:id' element={<SingleRepository />} exact/>
         <Route path='/review' element={<ReviewForm />} exact/>
-        <Route path='/userReviews' element={<UserReviews user='temp'/>} exact />
+        <Route path='/userReviews' element={<UserReviews />} exact />
         <Route path='/signUp' element={<SignUpForm />} exact/>
         <Route path='*' element={<Navigate to="/" replace />} />
       </Routes>

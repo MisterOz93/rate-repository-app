@@ -45,22 +45,7 @@ const initialValues = {
 }
 
 const SignIn = ({submitHandler}) => {
- /* moved to Main and passed as submitHandler
-  const [signIn] = useSignIn();
-  const navigate = useNavigate();
-  
-  const onSubmit = async (values) => {
-    const { username, password } = values;
-    
-    try {
-      await signIn({ username, password } );
-      navigate('/');
-      
-    } catch (e) {
-      console.log(e);
-    }
-  }
- */
+
   const validationSchema = yup.object().shape({
     username: yup.string().required('Username is Required'),
     password: yup.string().required('Password is Required')

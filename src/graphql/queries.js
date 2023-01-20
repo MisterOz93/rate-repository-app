@@ -37,6 +37,18 @@ export const CURRENT_USER = gql`
     me {
       id
       username
+      reviews {
+        edges {
+          node {
+            createdAt
+            rating
+            repository {
+              fullName
+            }
+            text
+          }
+        }
+      }
     }
   }`
 

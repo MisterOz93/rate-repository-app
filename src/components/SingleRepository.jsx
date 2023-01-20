@@ -49,12 +49,21 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const ReviewItem = ({review}) =>  {
-    //console.log('review passed to reviewItem is', review)
-    const reviewDateArr = review.createdAt.split('-');
-    const months = {'01': 'Jan', '02': 'Feb', '03': 'March', '04': 'Apr', '05': 'May', '06': 'June', '07': 'July',
-                     '08': 'Aug', '09': 'Sept', '10': 'Oct', '11': 'Nov', '12': 'Dec'}
-    const reviewDate = `${months[reviewDateArr[1]]}.${reviewDateArr[2].substring(0, 2)}.${reviewDateArr[0]}`;
+
+export const ReviewItem = ({review, userReviewsView=false}) =>  {
+
+    const formatReviewDate = (reviewDate) => {
+        const reviewDateArr = reviewDate.split('-');
+        const months = {'01': 'Jan', '02': 'Feb', '03': 'March', '04': 'Apr', '05': 'May', '06': 'June', '07': 'July',
+                         '08': 'Aug', '09': 'Sept', '10': 'Oct', '11': 'Nov', '12': 'Dec'};
+    
+        return`${months[reviewDateArr[1]]}.${reviewDateArr[2].substring(0, 2)}.${reviewDateArr[0]}`;
+    
+    }
+    
+
+    const reviewDate = formatReviewDate(review.createdAt);
+
 
     return(
         <View style={styles.reviewContainer}>
@@ -63,7 +72,7 @@ const ReviewItem = ({review}) =>  {
                     <Text fontWeight='bold' style={styles.reviewNumber}>{review.rating}</Text>
                 </View>
                 <View style={styles.reviewAuthorAndDate}>
-                    <Text fontWeight='bold'>{review.user.username}</Text>
+                    <Text fontWeight='bold'>{ !userReviewsView && review.user.username} {userReviewsView && review.repository.fullName}</Text>
                     <Text color='textSecondary'>{reviewDate}</Text>
                 </View>
             </View>

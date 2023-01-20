@@ -4,7 +4,7 @@ import Constants from 'expo-constants';
 import { useApolloClient, useQuery } from '@apollo/client';
 import { CURRENT_USER } from '../graphql/queries';
 import useAuthStorage from '../hooks/useAuthStorage';
-//import theme from '../theme';
+import { useNavigate } from 'react-router-native';
 import AppBarTab from './AppBarTab';
 
 const styles = StyleSheet.create({
@@ -19,10 +19,11 @@ const AppBar = () => {
 
   
   const [currentUser, setCurrentUser] = useState(null)
+  const navigate = useNavigate();
 
   const {data, loading} = useQuery(CURRENT_USER, {
-    fetchPolicy: 'cache-and-network'
-  })
+    fetchPolicy: 'cache-and-network',
+  });
 
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
@@ -43,7 +44,8 @@ const AppBar = () => {
       
     await authStorage.removeAccessToken();
     apolloClient.resetStore();
-  }
+    navigate('/');
+  };
   
   return(
     <View style={styles.container}>
