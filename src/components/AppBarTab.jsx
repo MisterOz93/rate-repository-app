@@ -34,6 +34,9 @@ const AppBarTab = ({label, handlePress}) => {
     case('Sign Up'):
       destination = '/signUp';
       break;
+    case('My Reviews'):
+      destination='/userReviews';
+      break;
     case('Sign Out'):
       return(
         <Pressable style={signInOutTab} onPress={() => handlePress()}>

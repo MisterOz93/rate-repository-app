@@ -58,6 +58,7 @@ const AppBar = () => {
       { currentUser &&
         <>
           <AppBarTab label={'Create a Review'} />
+          <AppBarTab label={'My Reviews'} />
           <AppBarTab label={'Sign Out'} handlePress={signOut} />
         </>
         }

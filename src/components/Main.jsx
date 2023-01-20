@@ -9,6 +9,7 @@ import SingleRepository from './SingleRepository';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-native';
 import useSignIn from '../hooks/useSignIn';
 import ReviewForm from './ReviewForm';
+import UserReviews from './UserReviews';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
   },
   appBar: {
     backgroundColor: theme.appBar.backgroundColor,
-    justifyContent: 'flex-end'
+    justifyContent: 'space-evenly'
   },
 });
 
@@ -50,6 +51,7 @@ const Main = () => {
         <Route path='/signIn' element={<SignIn submitHandler={signInHandler}/>} exact/>
         <Route path='/repository/:id' element={<SingleRepository />} exact/>
         <Route path='/review' element={<ReviewForm />} exact/>
+        <Route path='/userReviews' element={<UserReviews user='temp'/>} exact />
         <Route path='/signUp' element={<SignUpForm />} exact/>
         <Route path='*' element={<Navigate to="/" replace />} />
       </Routes>
