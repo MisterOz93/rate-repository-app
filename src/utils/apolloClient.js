@@ -15,10 +15,16 @@ const cache = new InMemoryCache({
     Query: {
       fields: {
         repositories: relayStylePagination(),
-      }
-    }
-  }
-})
+      },
+    },
+    Repository: {
+      fields: {
+        reviews: relayStylePagination(),
+      },
+    },
+  },
+});
+
 const createApolloClient = (authStorage) => {
   const authLink = setContext(async (_, { headers }) => {
     try {

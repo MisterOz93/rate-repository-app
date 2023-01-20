@@ -41,36 +41,43 @@ export const CURRENT_USER = gql`
   }`
 
 export const GET_REPOSITORY = gql `
-  query Repository($repositoryId: ID!) {
-    repository(id: $repositoryId){
-      createdAt
-      description
-      forksCount
-      fullName
-      id
-      language
-      name
-      openIssuesCount
-      ownerAvatarUrl
-      ownerName
-      ratingAverage
-      watchersCount
-      reviewCount
-      stargazersCount
-      url
-      reviews {
-        edges {
-          node {
+query Repository($repositoryId: ID!, $first: Int, $after: String) {
+  repository(id: $repositoryId){
+    createdAt
+    description
+    forksCount
+    fullName
+    id
+    language
+    name
+    openIssuesCount
+    ownerAvatarUrl
+    ownerName
+    ratingAverage
+    watchersCount
+    reviewCount
+    stargazersCount
+    url
+    reviews(first: $first, after: $after) {
+      edges {
+        node {
+          id
+          text
+          rating
+          createdAt
+          user {
             id
-            text
-            rating
-            createdAt
-            user {
-              id
-              username
-            }
+            username
           }
         }
       }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      totalCount
     }
-  }`
+  }
+}`
