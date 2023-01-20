@@ -12,15 +12,13 @@ const styles = StyleSheet.create({
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const UserReviews = () => {
-    const {user, loading } = useCurrentUser();
+    const {user, loading } = useCurrentUser({includeReviews: true});
 
     if (loading){
         return( <h3>Loading...</h3>)
     }
-    console.log('user is', user)
 
     const reviews = user ? user.reviews.edges.map(edge => edge.node) : [];
-    console.log('reviews', reviews)
 
     return(
         <View>

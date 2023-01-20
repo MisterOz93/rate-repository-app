@@ -1,10 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { CURRENT_USER } from "../graphql/queries";
 
-const useCurrentUser = () => {
+const useCurrentUser = (variables) => {
 
     const { data, loading, ...result } = useQuery(CURRENT_USER, {
         fetchPolicy: 'cache-and-network',
+        variables,
     });
 
     return({

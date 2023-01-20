@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
       fontWeight: theme.fontWeights.bold,
       font: theme.fonts.main,
       marginTop: 30,
-      marginLeft: 20,
+      marginLeft: 10,
       fontSize: theme.fontSizes.subheading
     },
     signUpFlex: {

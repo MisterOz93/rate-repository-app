@@ -33,11 +33,11 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const CURRENT_USER = gql`
-  query {
+  query getCurrentUser($includeReviews: Boolean = false){
     me {
       id
       username
-      reviews {
+      reviews @include(if: $includeReviews) {
         edges {
           node {
             createdAt
