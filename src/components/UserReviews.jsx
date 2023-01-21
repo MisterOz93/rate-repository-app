@@ -1,4 +1,5 @@
 import { FlatList, View, StyleSheet } from "react-native";
+import Text from "./Text";
 import useCurrentUser from "../hooks/useCurrentUser";
 import { ReviewItem } from "./SingleRepository";
 
@@ -12,6 +13,7 @@ const styles = StyleSheet.create({
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const UserReviews = () => {
+
     const {user, loading } = useCurrentUser({includeReviews: true});
 
     if (loading){
@@ -19,6 +21,14 @@ const UserReviews = () => {
     }
 
     const reviews = user ? user.reviews.edges.map(edge => edge.node) : [];
+
+    if (reviews.length === 0){
+        return(
+            <View>
+                <Text>Leave Reviews on Repositories to see them here.</Text>
+            </View>
+        )
+    }
 
     return(
         <View>

@@ -42,8 +42,10 @@ export const CURRENT_USER = gql`
           node {
             createdAt
             rating
+            id
             repository {
               fullName
+              id
             }
             text
           }

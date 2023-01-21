@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
   },
   appBar: {
     backgroundColor: theme.appBar.backgroundColor,
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    zIndex: 2,
   },
 });
 

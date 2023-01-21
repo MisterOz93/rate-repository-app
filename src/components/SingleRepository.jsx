@@ -1,9 +1,11 @@
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet, Pressable, Alert } from "react-native";
 import Text from "./Text";
 import { useParams } from "react-router-native";
 import RepositoryItem from "./RepositoryItem";
 import useRepository from "../hooks/useRepository";
 import theme from "../theme";
+import { useNavigate } from "react-router-native";
+import useDeleteReview from "../hooks/useDeleteReview";
 
 const styles = StyleSheet.create({
     reviewContainer: {
@@ -42,6 +44,29 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
 
+    reviewButtonsContainer: {
+        flexDirection: 'row',
+        margin: 5,
+        justifyContent: 'space-around',
+    },
+
+    viewRepositoryButton: {
+        backgroundColor: theme.colors.primary,
+        padding: 10,
+        paddingHorizontal: 20,
+    },
+
+    deleteReviewButton: {
+        backgroundColor: theme.colors.deleteReviewButton,
+        padding: 10,
+        paddingHorizontal: 20,
+
+    },
+
+    buttonText: {
+        color: theme.colors.signInButtonText,
+    },
+
     separator: {
         height: 10,
       },
@@ -52,6 +77,9 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 export const ReviewItem = ({review, userReviewsView=false}) =>  {
 
+    const navigate = useNavigate();
+    const [deleteReview] = useDeleteReview();
+
     const formatReviewDate = (reviewDate) => {
         const reviewDateArr = reviewDate.split('-');
         const months = {'01': 'Jan', '02': 'Feb', '03': 'March', '04': 'Apr', '05': 'May', '06': 'June', '07': 'July',
@@ -61,8 +89,34 @@ export const ReviewItem = ({review, userReviewsView=false}) =>  {
     
     }
     
-
+    
     const reviewDate = formatReviewDate(review.createdAt);
+
+    const viewRepositoryHandler = () => {
+        navigate(`/repository/${review.repository.id}`)
+    }
+
+    const deleteReviewHandler = () => {
+
+        Alert.alert('Confirmation', 'Are you sure you want to delete this review?', [
+          {
+            text: 'Cancel',
+            onPress: () => {},
+            style: 'cancel',
+          },
+          {
+            text: 'Confirm',
+            onPress: async () => {
+                try {
+                    await deleteReview(review.id);
+                } catch(e) {
+                    console.log(e)
+                }
+            }},
+        ]);
+
+
+    };
 
 
     return(
@@ -79,6 +133,15 @@ export const ReviewItem = ({review, userReviewsView=false}) =>  {
             <View style={styles.reviewText}>
                 <Text>{review.text}</Text>
             </View>
+            { userReviewsView && 
+            <View style={styles.reviewButtonsContainer}>
+                <Pressable onPress={viewRepositoryHandler} style={styles.viewRepositoryButton}>
+                    <Text fontWeight='bold' style={styles.buttonText}>View Repository</Text>
+                </Pressable>
+                <Pressable onPress={deleteReviewHandler} style={styles.deleteReviewButton}>
+                    <Text fontWeight='bold' style={styles.buttonText}>Delete Review</Text>
+                </Pressable>    
+            </View>}
         </View>
     )
 }

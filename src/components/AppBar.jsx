@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     flexDirection: 'row',
-    paddingRight: 10
+    paddingRight: 10,
+    paddingBottom: 5,
   },
 });
 
@@ -49,7 +50,7 @@ const AppBar = () => {
   
   return(
     <View style={styles.container}>
-      <ScrollView horizontal>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal>
         <AppBarTab label={'Repositories'}/>
       { !currentUser &&
         <>

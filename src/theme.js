@@ -15,6 +15,7 @@ const theme = {
       dropdownMenu: '#F0F0F0',
       dropdownText: 'black',
       dropdownCancel: '#989898',
+      deleteReviewButton: 'red',
     },
     fontSizes: {
       body: 14,
